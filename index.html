@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fauziyah & Arif</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+}
+
+/* CANVA BACKGROUND */
+.canva {
+    position: fixed;
+    inset: 0;
+}
+
+.canva iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* OVERLAY HITAM 18% */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.18);
+    z-index: 2;
+}
+
+/* CONTENT */
+.content {
+    position: fixed;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.content p {
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+.content h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    margin: 10px 0 25px;
+}
+
+.tamu {
+    font-size: 15px;
+    margin-bottom: 35px;
+}
+
+.btn-open {
+    padding: 14px 36px;
+    border-radius: 30px;
+    border: none;
+    font-size: 16px;
+    background: #fff;
+    color: #000;
+    cursor: pointer;
+}
+
+/* SOUND BUTTON */
+.sound-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 4;
+    background: rgba(255,255,255,0.85);
+    border: none;
+    border-radius: 50%;
+    width: 46px;
+    height: 46px;
+    font-size: 20px;
+    cursor: pointer;
+    display: none;
+}
+</style>
+</head>
+
+<body>
+
+<!-- AUDIO -->
+<audio id="music" loop>
+    <source src="assets/audio/berpayung-tuhan.mp3" type="audio/mpeg">
+</audio>
+
+<!-- CANVA -->
+<div class="canva">
+    <iframe src="assets/images/cover.png" allowfullscreen></iframe>
+</div>
+
+<!-- OVERLAY -->
+<div class="overlay"></div>
+
+<!-- CONTENT -->
+<div class="content">
+    <p>THE WEDDING OF</p>
+    <h1>Fauziyah & Arif</h1>
+
+    <div class="tamu">
+        Welcome,<br>
+        <strong id="namaTamu">Tamu Undangan</strong>
+    </div>
+
+    <button class="btn-open" onclick="bukaUndangan()">Buka Undangan</button>
+</div>
+
+<!-- SOUND CONTROL -->
+<button class="sound-btn" id="soundBtn" onclick="toggleSound()">🔊</button>
+
+<script>
+// Ambil nama tamu dari URL
+const params = new URLSearchParams(window.location.search);
+const nama = params.get("to");
+if (nama) {
+    document.getElementById("namaTamu").innerText = decodeURIComponent(nama);
+}
+
+const music = document.getElementById("music");
+const soundBtn = document.getElementById("soundBtn");
+let isPlaying = false;
+
+// Klik Buka Undangan
+function bukaUndangan() {
+    music.play();
+    isPlaying = true;
+    soundBtn.style.display = "block";
+
+    setTimeout(() => {
+        window.location.href = "https://theweddingoffauziyahandarif.my.canva.site/weddinginvitation";
+    }, 700);
+}
+
+// Toggle Sound
+function toggleSound() {
+    if (isPlaying) {
+        music.pause();
+        soundBtn.innerHTML = "🔇";
+    } else {
+        music.play();
+        soundBtn.innerHTML = "🔊";
+    }
+    isPlaying = !isPlaying;
+}
+</script>
+
+</body>
+</html>
